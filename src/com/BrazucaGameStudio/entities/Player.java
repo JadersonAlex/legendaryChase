@@ -32,6 +32,8 @@ public class Player extends Entity{
 	
 	public int ammo = 0;
 	
+	public boolean shoot = false;
+	
 	public double life = 100, maxlife =100; // vida do jogador
 	
 	
@@ -128,7 +130,40 @@ public class Player extends Entity{
 			*/
 	
 		//}
-		
+		if(shoot) {
+			shoot = false;
+			if( arma && ammo > 0) {
+			ammo --;
+			// criar a bala e atirar
+			int dx = 0;
+			int px = 0;
+			int py = 2;
+			if(dir == right_dir) { // direção para atirar
+				px = 15; // posição  do tiro
+				dx = 1;  // posição  do tiro
+			}
+			if(dir == left_dir) {
+				px = -8; // posição  do tiro
+			    dx = -1; // posição  do tiro
+			}
+			
+			if(dir == up_dir) {
+				
+				px = 15;
+		    	dx = 1;
+				
+			    
+			}
+			
+			if(dir == down_dir) {
+				px = -8; // posição  do tiro
+			    dx = -1; // posição  do tiro
+			}
+			
+			BulletShoot bullet = new BulletShoot(this.getX() + px, this.getY() + py, 3,3,null, dx, 0);
+		    Game.bullets.add(bullet);
+			}
+		}
 		if(life<= 0) {
 			/*Game.entities.clear();
 			Game.enemies.clear();
